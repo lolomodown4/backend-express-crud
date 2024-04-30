@@ -4,11 +4,14 @@ const app = express();
 
 const dotenv = require("dotenv").config();
 
+const cors = require("cors");
+
 const dbConnection = require("./config/db_Connection");
 
 dbConnection();
 
 app.use(express.json());
+app.use(cors());
 
 app.get("/", (req, res) => {
   res.status(200).json({ message: "this is home page" });
