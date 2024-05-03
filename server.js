@@ -1,5 +1,4 @@
 const express = require("express");
-
 const app = express();
 
 const dotenv = require("dotenv").config();
@@ -9,6 +8,9 @@ const cors = require("cors");
 const dbConnection = require("./config/db_Connection");
 
 dbConnection();
+
+const bodyParser = require("body-parser");
+/* app.use(bodyParser.urlencoded({ extended: false })); */
 
 app.use(express.json());
 app.use(cors());

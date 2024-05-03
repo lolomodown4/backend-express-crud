@@ -11,6 +11,7 @@ const getAllTodos = async (req, res) => {
 
 const addTodo = async (req, res) => {
   try {
+    console.log(req.body);
     const addedTodo = await Todo.create(req.body);
     res.status(201).json(addedTodo);
   } catch (error) {
@@ -22,7 +23,7 @@ const findTodo = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const findSpecificTodo = await Todo.find({ id: id });
+    const findSpecificTodo = await Todo.find({ title: id });
 
     res.status(200).json(findSpecificTodo);
   } catch (error) {
@@ -34,8 +35,10 @@ const deleteTodo = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const deleteThis = await Todo.deleteOne({ id: id });
-    res.status(200).json(deleteThis);
+    await Todo.deleteOne({ _id: id });
+
+    const dataLeft = await Todo.find({});
+    res.status(200).json(dataLeft);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
